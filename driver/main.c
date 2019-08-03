@@ -1,9 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
-#include "codes.h"
-#include "../lib/lib.h"
-#include <windows.h>
+#include "codesFile.h"
 
 char* locLow;
 char* locHigh;
@@ -20,7 +18,7 @@ void RunCode(int num, char* buffer, struct timespec* carrier, struct timespec* t
     buffer = locLow;
     for (int k = 0; k < 16; k++)
     {
-        printf("%c", *buffer);
+        fprintf(stderr, *buffer);
         buffer++;
         nanosleep(carrier, tim);
     }
@@ -53,9 +51,9 @@ int main(int argc, char** argv)
 
     while (1)
     {
-        for (int carrierNum = 0; carrierNum < 7; carrierNum++)
+        for (int carrierNum = 0; carrierNum <= 6; carrierNum++)
         {
-            printf("carrier: %i\n", carrierVec[carrierNum].tv_nsec);
+            printf("carrier: %li\n", carrierVec[carrierNum].tv_nsec);
             for (int codeVecNum = 0; codeVecNum < sizeof(codes) / sizeof(codes[0]); codeVecNum++)
             {
                 for (int codeNum = 0; codes[codeVecNum][codeNum] != '\0'; codeNum++)
